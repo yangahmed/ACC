@@ -10,9 +10,10 @@ def add(x, y):
     return x + y
 
 @app.task
-def count(word, data):
+def count(word, path):
     count = 0
-    for line in data:
+    f = open(path)
+    for line in f:
         # parse the tweets
         try:
             tweet = json.loads(line)
