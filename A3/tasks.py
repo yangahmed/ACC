@@ -6,8 +6,14 @@ import re
 app = Celery('tasks', backend='rpc://', broker='pyamqp://guest@localhost//')
 
 @app.task
-def add(x, y):
-    return x + y
+def sum(word, path):
+    count = 0
+    files= os.listdir(path)
+    for file in files:
+        path = p + "/" + file
+        result = count.delay(word, path)
+        count += result.get()
+    return count
 
 @app.task
 def count(word, path):
