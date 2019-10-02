@@ -1,7 +1,7 @@
 from tasks import count, add
 import os
 
-path = '/home/ubuntu/datadisk/data'
+path = '/home/ubuntu/data'
 word = 'han'
 files= os.listdir(path)
 
