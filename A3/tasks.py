@@ -5,9 +5,9 @@ import re
 
 app = Celery('tasks', backend='rpc://', broker='pyamqp://guest@localhost//')
 
-@app.task
-def add(x, y):
-    return x + y
+# @app.task
+# def add(x, y):
+#     return x + y
 
 @app.task
 def count(word, data):
