@@ -12,18 +12,36 @@ def count_word():
     words = request.args.get("words")
     wordlist = words.split(',')
     files= os.listdir(p)
-    res = []
-    for word in wordlist:
-        result = []
-        for file in files:
-            path = p + "/" + file
-            result.append(count.delay(word, path))
+    res = [0] * len(wordlist)
+    result = []
+    for file in files:
+        path = p + "/" + file
+        result.append(count.delay(wordlist, path))
 
-        c = 0
-        for i in range(len(result)):
-            c += result[i].get()
-        res.append({word: c})
-    return jsonify(result=res)
+    for i in range(len(result)):
+        temp = result[i].get()
+        for j in range(len(res)):
+            res[j] += temp[j]
+
+    return res
+
+# @app.route('/count', methods=['GET'])
+# def count_word():
+#     words = request.args.get("words")
+#     wordlist = words.split(',')
+#     files= os.listdir(p)
+#     res = []
+#     for word in wordlist:
+#         result = []
+#         for file in files:
+#             path = p + "/" + file
+#             result.append(count.delay(word, path))
+
+#         c = 0
+#         for i in range(len(result)):
+#             c += result[i].get()
+#         res.append({word: c})
+#     return jsonify(result=res)
 
 if __name__ == '__main__':
     app.run()
