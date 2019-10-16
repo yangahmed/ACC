@@ -23,7 +23,11 @@ def count_word():
         for j in range(len(res)):
             res[j] += temp[j]
 
-    return res
+    d = {}
+    for ii in range(len(wordlist)):
+        d[wordlist[ii]] = res[ii]
+
+    return jsonify(d)
 
 # @app.route('/count', methods=['GET'])
 # def count_word():
