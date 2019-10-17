@@ -44,7 +44,7 @@ def scale_measure():
     files= os.listdir(p)
     res = [0] * len(wordlist)
     result = []
-    for ii in range(int(len(files))/int(workers):
+    for ii in range(int(len(files))*int(workers)/4):
         path = p + "/" + files[ii]
         result.append(count.delay(wordlist, path))
 
