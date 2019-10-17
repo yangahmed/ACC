@@ -4,7 +4,7 @@ import json
 import re
 import os
 
-app = Celery('tasks', backend='rpc://', broker='pyamqp://guest@localhost//')
+app = Celery('tasks', backend='rpc://', broker='pyamqp://jiayi:123@130.238.28.94/jiayi_master')
 
 @app.task
 def sum(word, p):
@@ -35,7 +35,7 @@ def count(words, path):
                 if words[i] in textwords:
                     count[i] += 1
     return count
-
+ 
 # @app.task
 # def count(word, path):
 #     count = 0
