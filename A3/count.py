@@ -38,9 +38,9 @@ def count_word():
 def scale_measure():
     t_start = time.time()
     words = request.args.get("words")
+    wordlist = words.split(',')
     workers = request.args.get("workers")
     int(workers)
-    wordlist = words.split(',')
     files= os.listdir(p)
     res = [0] * len(wordlist)
     result = []
