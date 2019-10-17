@@ -40,11 +40,11 @@ def scale_measure():
     words = request.args.get("words", 'han')
     wordlist = words.split(',')
     workers = request.args.get("workers")
-    int(workers)
+    # int(workers)
     files= os.listdir(p)
     res = [0] * len(wordlist)
     result = []
-    for ii in range(len(files)/workers):
+    for ii in range(int(len(files))/int(workers):
         path = p + "/" + files[ii]
         result.append(count.delay(wordlist, path))
 
