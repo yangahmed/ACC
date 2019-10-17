@@ -37,7 +37,7 @@ def count_word():
 @app.route('/scalemeasure', methods=['GET'])
 def scale_measure():
     t_start = time.time()
-    words = request.args.get("words")
+    words = request.args.get("words", 'han')
     wordlist = words.split(',')
     workers = request.args.get("workers")
     int(workers)
