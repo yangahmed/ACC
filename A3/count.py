@@ -34,7 +34,7 @@ def count_word():
 
     return jsonify(d)
 
-@app.route('/scalemeature', methods=['GET'])
+@app.route('/scalemeasure', methods=['GET'])
 def scale_measure():
     t_start = time.time()
     words = request.args.get("words")
@@ -43,7 +43,7 @@ def scale_measure():
     files= os.listdir(p)
     res = [0] * len(wordlist)
     result = []
-    for ii in range(len(files)/workers):
+    for ii in range(len(files)/(int)workers):
         path = p + "/" + files[ii]
         result.append(count.delay(wordlist, path))
 
@@ -80,4 +80,4 @@ def scale_measure():
 #     return jsonify(result=res)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug = True)

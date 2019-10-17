@@ -7,16 +7,6 @@ import os
 app = Celery('tasks', backend='rpc://', broker='pyamqp://jiayi:123@130.238.28.94/jiayi_master')
 
 @app.task
-def sum(word, p):
-    c = 0
-    files= os.listdir(p)
-    for file in files:
-        path = p + "/" + file
-        result = count.delay(word, path)
-        c += result.get()
-    return c
-
-@app.task
 def count(words, path):
     count = [0] * len(words)
     f = open(path)
