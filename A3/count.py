@@ -34,6 +34,33 @@ def count_word():
 
     return jsonify(d)
 
+@app.route('/scalemeature', methods=['GET'])
+def scale_measure():
+    t_start = time.time()
+    words = request.args.get("words")
+    workers = request.args.get("workers")
+    wordlist = words.split(',')
+    files= os.listdir(p)
+    res = [0] * len(wordlist)
+    result = []
+    for ii in range(len(files)/workers):
+        path = p + "/" + files[ii]
+        result.append(count.delay(wordlist, path))
+
+    for i in range(len(result)):
+        temp = result[i].get()
+        for j in range(len(res)):
+            res[j] += temp[j]
+
+    d = {}
+    for ii in range(len(wordlist)):
+        d[wordlist[ii]] = res[ii]
+
+    t_end = time.time()
+    print('time:', t_end - t_start, 's')
+
+    return jsonify(d)
+
 # @app.route('/count', methods=['GET'])
 # def count_word():
 #     words = request.args.get("words")
