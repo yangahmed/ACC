@@ -2,6 +2,7 @@ from tasks import count
 import os
 from flask import Flask, jsonify
 from flask import request
+import time
 
 app = Flask(__name__)
 
@@ -9,6 +10,7 @@ p = '/home/ubuntu/data'
 
 @app.route('/count', methods=['GET'])
 def count_word():
+    t_start = time.time()
     words = request.args.get("words")
     wordlist = words.split(',')
     files= os.listdir(p)
@@ -26,6 +28,9 @@ def count_word():
     d = {}
     for ii in range(len(wordlist)):
         d[wordlist[ii]] = res[ii]
+
+    t_end = time.time()
+    print('time:', t_end - t_start, 's')
 
     return jsonify(d)
 
